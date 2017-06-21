@@ -124,5 +124,12 @@
     return originalRect;
 }
 
-
+//若屏幕旋转 -drawRect: 不会主动调用，为了避免出现文字拉伸，需重写此方法
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (self.hasText || self.placeholder == nil) {
+        return;
+    }
+    [self drawRect:self.frame];
+}
 @end
